@@ -76,4 +76,14 @@ fun CalcRow(display: MutableState<String>, startNum: Int, numButtons: Int) {
         }
     }
 }
-
+@Composable
+fun CalcDisplay(display: MutableState<String>) {
+    Text(
+        text = display.value,
+        fontSize = 32.sp,
+        modifier = Modifier
+            .height(50.dp)
+            .fillMaxWidth()
+            .padding(5.dp)
+    )
+}
