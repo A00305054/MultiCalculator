@@ -105,4 +105,25 @@ fun CalcOperationButton(operation: String, display: MutableState<String>) {
         Text(text = operation)
     }
 }
-
+@Composable
+fun CalcEqualsButton(display: MutableState<String>, operation: MutableState<String>) {
+    Button(
+        onClick = {
+            val parts = display.value.split(operation.value)
+            if (parts.size == 2) {
+                val result = when (operation.value) {
+                    "+" -> parts[0].toDouble() + parts[1].toDouble()
+                    "-" -> parts[0].toDouble() - parts[1].toDouble()
+                    "*" -> parts[0].toDouble() * parts[1].toDouble()
+                    "/" -> parts[0].toDouble() / parts[1].toDouble()
+                    else -> 0.0
+                }
+                display.value = result.toString()
+                operation.value = ""
+            }
+        },
+        modifier = Modifier.padding(4.dp)
+    ) {
+        Text(text = "=")
+    }
+}
