@@ -42,4 +42,10 @@ android {
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
+    tasks.register("testClasses") {
+        doLast {
+            println("This is a placeholder task for :shared:testClasses.")
+        }
+    }
+
 }
