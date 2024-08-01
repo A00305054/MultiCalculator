@@ -29,9 +29,11 @@ The Multicalculator project is a mobile application for performing basic arithme
 - 
   - **`main` branch**: Contains the stable, production-ready code.
   - **`feature`**: Used for developing new features and fixes without affecting the stability of the `main` branch.
+  - 
 - **Merging**:
 - 
   - Merged `feature-branch` into `main` after feature completion and testing to incorporate new features and updates.
+  - 
 - **Commits**:
 - 
   - Each commit includes a detailed message describing the changes made, such as "Added clear button functionality".
