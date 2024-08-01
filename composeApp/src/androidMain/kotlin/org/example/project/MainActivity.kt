@@ -38,6 +38,7 @@ fun CalcView() {
             .background(Color.LightGray)
             .fillMaxSize()
             .padding(16.dp)
+            .size(32.dp)
     ) {
         val displayText = remember { mutableStateOf("0") }
         if (complete && operation != "") {
@@ -121,7 +122,7 @@ fun CalcDisplay(display: MutableState<String>) {
         text = display.value,
         fontSize = 32.sp,
         modifier = Modifier
-            .height(50.dp)
+            .height(70.dp)
             .fillMaxWidth()
             .padding(5.dp)
     )
@@ -131,8 +132,10 @@ fun CalcNumericButton(number: Int, onPress: (number: Int) -> Unit) {
     Button(
         onClick = { onPress(number)  },
         modifier = Modifier.padding(4.dp)
+            .width(70.dp)
+            .height(70.dp)
     ) {
-        Text(text = number.toString())
+        Text(text = number.toString(), fontSize = 24.sp)
     }
 }
 @Composable
@@ -140,8 +143,10 @@ fun CalcOperationButton(operation: String, onPress: (operation: String) -> Unit)
     Button(
         onClick = { onPress(operation) },
         modifier = Modifier.padding(4.dp)
+            .width(70.dp)
+            .height(70.dp)
     ) {
-        Text(text = operation)
+        Text(text = operation, fontSize = 35.sp)
     }
 }
 @Composable
@@ -149,8 +154,10 @@ fun CalcEqualsButton(onPress: ()-> Unit, operation: String) {
     Button(
         onClick = { onPress() },
         modifier = Modifier.padding(4.dp)
+            .width(70.dp)
+            .height(70.dp)
 
     ) {
-        Text(text = "=")
+        Text(text = "=", fontSize = 35.sp)
     }
 }
