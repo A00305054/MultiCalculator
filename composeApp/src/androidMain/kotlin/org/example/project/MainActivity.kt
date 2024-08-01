@@ -32,7 +32,6 @@ fun CalcView() {
     var operation by rememberSaveable { mutableStateOf("") }
     var complete by rememberSaveable { mutableStateOf(false) }
 
-
     Column(
         modifier = Modifier
             .background(Color.LightGray)
@@ -42,9 +41,7 @@ fun CalcView() {
     ) {
         val displayText = remember { mutableStateOf("0") }
         if (complete && operation != "") {
-            // 1. Create a mutable variable named answer and assign a value of 0.
             var answer = 0
-            // 2. Create a when statement and use the operator variable.
             when (operation) {
                 "+" -> answer = leftNumber + rightNumber
                 "-" -> answer = leftNumber - rightNumber
@@ -85,6 +82,15 @@ fun CalcView() {
         fun equalsPress() {
             complete = true
         }
+
+        fun clearPress() {
+            leftNumber = 0
+            rightNumber = 0
+            operation = ""
+            complete = false
+            displayText.value = "0"
+        }
+
         CalcDisplay(display = displayText)
 
         Row(modifier = Modifier.padding(top = 16.dp)) {
@@ -94,6 +100,7 @@ fun CalcView() {
                 }
                 Row {
                     CalcNumericButton(number = 0, onPress = { numberPress(it) })
+                    CalcClearButton(onPress = { clearPress() })
                     CalcEqualsButton(onPress = { equalsPress() }, operation = operation)
                 }
             }
@@ -105,8 +112,8 @@ fun CalcView() {
             }
         }
     }
-
 }
+
 @Composable
 fun CalcRow(onPress: (number: Int) -> Unit, startNum: Int, numButtons: Int) {
     val endNum = startNum + numButtons
@@ -116,6 +123,7 @@ fun CalcRow(onPress: (number: Int) -> Unit, startNum: Int, numButtons: Int) {
         }
     }
 }
+
 @Composable
 fun CalcDisplay(display: MutableState<String>) {
     Text(
@@ -127,37 +135,55 @@ fun CalcDisplay(display: MutableState<String>) {
             .padding(5.dp)
     )
 }
+
 @Composable
 fun CalcNumericButton(number: Int, onPress: (number: Int) -> Unit) {
     Button(
         onClick = { onPress(number)  },
-        modifier = Modifier.padding(4.dp)
+        modifier = Modifier
+            .padding(4.dp)
             .width(70.dp)
             .height(70.dp)
     ) {
         Text(text = number.toString(), fontSize = 24.sp)
     }
 }
+
 @Composable
 fun CalcOperationButton(operation: String, onPress: (operation: String) -> Unit) {
     Button(
         onClick = { onPress(operation) },
-        modifier = Modifier.padding(4.dp)
+        modifier = Modifier
+            .padding(4.dp)
             .width(70.dp)
             .height(70.dp)
     ) {
         Text(text = operation, fontSize = 35.sp)
     }
 }
+
 @Composable
-fun CalcEqualsButton(onPress: ()-> Unit, operation: String) {
+fun CalcEqualsButton(onPress: () -> Unit, operation: String) {
     Button(
         onClick = { onPress() },
-        modifier = Modifier.padding(4.dp)
+        modifier = Modifier
+            .padding(4.dp)
             .width(70.dp)
             .height(70.dp)
-
     ) {
         Text(text = "=", fontSize = 35.sp)
+    }
+}
+
+@Composable
+fun CalcClearButton(onPress: () -> Unit) {
+    Button(
+        onClick = { onPress() },
+        modifier = Modifier
+            .padding(4.dp)
+            .width(70.dp)
+            .height(70.dp)
+    ) {
+        Text(text = "Clear", fontSize = 14.sp)
     }
 }
