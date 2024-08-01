@@ -184,6 +184,6 @@ fun CalcClearButton(onPress: () -> Unit) {
             .width(70.dp)
             .height(70.dp)
     ) {
-        Text(text = "C", fontSize = 25.sp)
+        Text(text = "C", fontSize = 28.sp)
     }
 }
